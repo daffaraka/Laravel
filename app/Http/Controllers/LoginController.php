@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Authenticable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
     {
-    	return view("login-form");
+    	return view("auth.login");
     }	
 
     public function login(Request $request)
@@ -21,7 +22,14 @@ class LoginController extends Controller
     		return redirect()->route("content.index");
     	} else {
     		// mengembalikan ke halaman login jika gagal
-    		return redirect()->back();
+    		return redirect()->back()->with('error','Email-Address And Password Are Wrong.');
     	}
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route("login");
     }
 }

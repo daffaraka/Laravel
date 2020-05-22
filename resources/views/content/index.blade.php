@@ -1,118 +1,75 @@
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{{ asset('/css/gaya.css') }}" />
-	<meta charset="utf-8">
 
-	
+@extends("layout.app")
 
+@push("style")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
+	 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 
-	<title>Data Pasien</title>
-	<body>
-		<style>
-			body {
-				background-color: #fff;
-				border: 0px;
-				font-family: Century Gothic;
-			}
+@endpush
 
-			.navigation {
-			    background-color: #36304a;
-			    width: 100%;
-			    margin-left: auto;
-			    margin-right: auto;
-			    font-size: 30px;
-			    padding: 15px 15px;
-			    font-size: 22px;
-			}
+@section("content")
 
-			.navigation a {
-				color: white;
-				text-decoration: none;
-				padding: 0 15px;
-				margin-right: 5px;
-			}
+<div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Tambah Pasien</h1>
+          </div><!-- /.col -->
 
-			a.active {
-				background: red;
-				border-radius: 10px;
-			}
-
-			.navigation .logout {
-				float: right;
-				background: white;
-				border-radius: 5px;
-				text-decoration: none;
-				color: black;
-			}
-		</style>
-
-
-	<div class="navigation">
-		<a href="{{route('content.index')}}" class="active"> Home </a>
-		<a href="#" class="logout"> Logout </a>
-
-
-	</div>
-			<div class="isi">
-				<style>
-					
-					.isi {
-						padding: 20px;
-					}
-
-
-				</style>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Kelola Pasien</a></li>
+              <li class="breadcrumb-item active">Daftar Pasien Pasien</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
 
 
 
+	<section class="content" style="margin: 30px;">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
 
-						<h1 style="text-align: center;" >Daftar Pasien Puskemas</h1>
-						<a href="{{route('content.create')}}" class="btn btn-info" style="margin-left: 10%;"> Daftar </a>
-						
-
-						<br> <br>
-
-							<table class="table table-hover" style="margin: unset; border: 1px solid #000; width: 80%; margin-left: auto; margin-right: auto;">
-								
-								
-								<thead>
-								
-									<tr style="background: #36304a; color: white;"> 
-										<th> ID </th>
-										<th> Nama </th>
-										<th> NIK </th>
-										<th> Alamat </th>
-										<th> Status </th>
-										<th> Tanggal Masuk </th>
-										<th> Action </th>
+  <h1 style="text-align: center;">Daftar Pasien</h1>
+            <a href="/puskesmas-pasien/create" class="btn btn-info"> + Tambah Data</a>
+             <a href="/puskesmas-pasien/export" class="btn btn-info" target="_blank">Export Excel</a>
+          <!--   <a href="/biodata-mahasiswa/export_excel" class="btn btn-info" target="_blank">Export Excel</a> -->
+           <br>
+           <br>
+    {!! $html->table() !!}
+			
+				</div>
+			</div>
+		</div>
+	</section>
+  
 
 
-									</tr>
-						</thead>
-						<tbody style="background: white">
-							@forelse($pasien as $data)
-							<tr style="background: #f7f8f3">
-										<td>{{$data->id}}</td>
-										<td>{{$data->nama}}</td>
-										<td>{{$data->nik}}</td>
-										<td>{{$data->alamat}}</td>
-										<td>{{$data->status}}</td>
-										<td>{{$data->time}} </td>
-								<td>
-									<a href="{{ route('content.show',['id' => $data->id]) }}" class="btn btn-success"> Detail </a>
-									<a href="{{ route('content.edit',['id' => $data->id]) }}" class="btn btn-warning"> Edit </a>
-									<a href="{{route('content.tindakan',['id'=> $data->id])}}" class="btn btn-secondary"> Tindakan </a>
-									<a onclick="return confirm('Ah dah yakin belum lu?');"href="{{ route('content.destroy',['id' => $data->id]) }}" class="btn btn-danger"> Delete </a>		
-								</td>
-							</tr>
-							@empty
-								<tr>
-									<td colspan="8" style="font-size: 20px"> Data belum tersedia </td>
-								</tr>
+@endsection
 
-							@endforelse
-						</tbody>
-					</table>
-				</div>	
-	
-</body>
+@push("script")
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
+
+      <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+
+    {!! $html->scripts() !!}
+@endpush
+
+
+
+
+
+
+
+
+
+
+
+

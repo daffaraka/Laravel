@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Aman</title>
+	<title>Login Ya</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
@@ -37,9 +37,11 @@
 						<input type="password"	class="form-control" name="password">
 					</div>
 					<button type="submit" class="btn btn-primary"> Login </button>
-
-
 				</form>
+
+				<p> Belum punya akun? 
+				<a href="{{route ('register') }}" style="font-size: 20px; "> Daftar </a> </p>
+
 			</div>
 		</div>
 	</div>
